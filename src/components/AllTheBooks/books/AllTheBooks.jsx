@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import fantasy from './fantasy.json'
-import "./AllTheBooks.css"
+import SingleBook from './SingleBook';
+import SearchBooks from './SearchBooks';
 
 export default function AllTheBooks() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     async function fetchBooks() {
@@ -22,6 +24,10 @@ export default function AllTheBooks() {
     fetchBooks();
   }, []);
 
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
         <h2 className='text-center'>Tutti i Libri</h2>
@@ -29,15 +35,13 @@ export default function AllTheBooks() {
             <p>Errore durante il recupero dei dati: {error}</p>
         ) : (
             <Container fluid className='my-3'>
-                <Row>
-                    {books.map(book => (
-                        <Col xs={3}>
-                            <Card key={book.asin}>
-                            <Card.Img className="custom-image" variant="top" src={book.img} alt={book.title} />
-                            <Card.Body>
-                                <Card.Title>{book.title}</Card.Title>
-                            </Card.Body>
-                            </Card>
+                <div className='d-flex justify-content-center mb-2'>
+                    <SearchBooks onSearch={(term) => setSearchTerm(term)}/>
+                </div>
+                <Row className='gy-3'>
+                    {filteredBooks.map(book => (
+                        <Col className='px-2' xs={2} key={book.asin}>
+                            <SingleBook book={book}/>
                         </Col>
                     ))}
                 </Row>

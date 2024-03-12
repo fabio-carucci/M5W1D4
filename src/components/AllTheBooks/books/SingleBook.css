@@ -1,0 +1,18 @@
+.custom-image {
+    height: 300px;
+    object-fit: cover;
+}
+
+.custom-body {
+    height: 100px;
+}
+
+.custom-title {
+    font-size: 12pt;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

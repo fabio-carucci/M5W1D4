@@ -6,21 +6,21 @@ export default function Welcome() {
   const [showAlert, setShowAlert] = useState(false);
 
   function handleButtonClick() {
-    setShowAlert(true);
+    setShowAlert(!showAlert);
   };
 
   return (
     <div className='my-3'>
       <div className='d-flex justify-content-center mb-3'>
         <Button variant={showAlert ? 'success' : 'info'} onClick={handleButtonClick}>
-            {showAlert ? 'Alert mostrato' : 'Mostra Alert'}
+            {showAlert ? 'SEI IL BENVENUTO' : 'WELCOME'}
         </Button>
       </div>
 
       {showAlert && (
         <div className='d-flex justify-content-center'>
-          <Alert style={{ width: '50%' }} variant="success" onClose={() => setShowAlert(false)} dismissible>
-              This is a success alert—check it out!
+          <Alert style={{ width: '75%' }} variant="success" onClose={() => setShowAlert(false)} dismissible>
+              Questa è la pagina di libri che abbiamo creato insieme, grazie!
           </Alert>
         </div>
       )}
