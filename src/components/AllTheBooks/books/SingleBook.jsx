@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from 'react-bootstrap';
 import "./SingleBook.css"
 
-export default function SingleBook(props) {
+export default function SingleBook( {book} ) {
 
-    const { book } = props;
+    const [selected, setSelected] = useState(false);
 
     return (
-        <Card key={book.asin}>
+        <Card 
+        key={book.asin}
+        onClick={() => setSelected(!selected)}
+        style={{ border: selected ? '2px solid red' : '2px solid whitesmoke' }}>
         <Card.Img className="custom-image" variant="top" src={book.img} alt={book.title} />
         <Card.Body className="custom-body">
             <Card.Title className="custom-title">{book.title}</Card.Title>
