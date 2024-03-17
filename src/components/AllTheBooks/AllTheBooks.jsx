@@ -36,7 +36,7 @@ export default function AllTheBooks() {
         {error ? (
             <p>Errore durante il recupero dei dati: {error}</p>
         ) : (
-            <Container fluid className='my-3'>
+            <Container  className='my-3'>
                 <div className='d-flex justify-content-center mb-2'>
                     <SearchBooks onSearch={(term) => setSearchTerm(term)} />
                 </div>
@@ -49,7 +49,7 @@ export default function AllTheBooks() {
                 ) : (
                     <Row className='gy-3'>
                         {filteredBooks.map(book => (
-                            <Col className='px-2' xs={2} key={book.asin}>
+                            <Col className='px-2' xs={3} key={book.asin}>
                                 <SingleBook book={book} />
                             </Col>
                         ))}

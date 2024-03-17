@@ -92,7 +92,7 @@ export default function CommentArea({ book }) {
     };
 
     return (
-        <div>
+        <div className="p-2">
             {error && <p>Errore: {error}</p>}
             {loading ? ( // Mostra lo spinner se il caricamento è in corso
                 <Spinner animation="border" role="status">

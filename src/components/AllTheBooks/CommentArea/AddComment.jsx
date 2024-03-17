@@ -9,7 +9,7 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
 
     return (
         <div>
-            <h5>Add Comment</h5>
+            <h5 className='text-center'>Add Comment</h5>
             <Form>
                 <Form.Group controlId="commentText">
                     <Form.Label>Comment</Form.Label>
@@ -29,9 +29,11 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Button variant="primary" onClick={handleAddComment}>
-                    Add Comment
-                </Button>
+                <div className='text-center mt-2'>
+                    <Button variant="primary" onClick={handleAddComment}>
+                        Add Comment
+                    </Button>
+                </div>
             </Form>
         </div>
     );
