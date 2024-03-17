@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import CommentList from './CommentList';
 import AddComment from './AddComment';
 
 export default function CommentArea({ book }) {
     const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [newComment, setNewComment] = useState({ comment: '', rate: '', elementId: book.asin });
-    const [editedComment, setEditedComment] = useState()
-
     
     async function fetchComments() {
         try {
+            setLoading(true);
             const response = await fetch(`https://striveschool-api.herokuapp.com/api/books/${book.asin}/comments/`, {
                 method: 'GET',
                 headers: {
@@ -21,6 +22,7 @@ export default function CommentArea({ book }) {
                 throw new Error('Errore durante il recupero delle recensioni');
             }
             const data = await response.json();
+            setLoading(false);
             setComments(data);
         } catch (error) {
             setError(error.message);
@@ -92,7 +94,16 @@ export default function CommentArea({ book }) {
     return (
         <div>
             {error && <p>Errore: {error}</p>}
-            <CommentList comments={comments} onEdit={onEdit} onDelete={onDelete}/>
+            {loading ? ( // Mostra lo spinner se il caricamento è in corso
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+                ) : (
+                <CommentList 
+                    comments={comments} 
+                    onEdit={onEdit} 
+                    onDelete={onDelete}/>
+            )}
             <AddComment
                 newComment={newComment}
                 setNewComment={setNewComment}

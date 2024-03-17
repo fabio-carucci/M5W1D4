@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import fantasy from './fantasy.json'
 import SingleBook from './SingleBook';
 import SearchBooks from './SearchBooks';
 
 export default function AllTheBooks() {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -16,6 +17,7 @@ export default function AllTheBooks() {
         // let data = await response.json(); 
 
         setBooks(fantasy);
+        setLoading(false);
       } catch (error) {
         setError(error.message);
       }
@@ -36,17 +38,25 @@ export default function AllTheBooks() {
         ) : (
             <Container fluid className='my-3'>
                 <div className='d-flex justify-content-center mb-2'>
-                    <SearchBooks onSearch={(term) => setSearchTerm(term)}/>
+                    <SearchBooks onSearch={(term) => setSearchTerm(term)} />
                 </div>
-                <Row className='gy-3'>
-                    {filteredBooks.map(book => (
-                        <Col className='px-2' xs={2} key={book.asin}>
-                            <SingleBook book={book}/>
-                        </Col>
-                    ))}
-                </Row>
+                {loading ? ( 
+                    <div className="d-flex justify-content-center">
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+                ) : (
+                    <Row className='gy-3'>
+                        {filteredBooks.map(book => (
+                            <Col className='px-2' xs={2} key={book.asin}>
+                                <SingleBook book={book} />
+                            </Col>
+                        ))}
+                    </Row>
+                )}
             </Container>
         )}
-        </div>
-  );
+    </div>
+);
 };
