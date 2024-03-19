@@ -4,15 +4,15 @@ import { Button, Form, InputGroup } from 'react-bootstrap';
 export default function SearchBooks({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
         e.preventDefault();
         onSearch(searchTerm);
   };
 
   return (
     <>
-      <Form onSubmit={handleSubmit} style={{ width: '50%' }}>
-        <InputGroup className="mb-3">
+      <Form onSubmit={handleSubmit}>
+        <InputGroup>
           <Form.Control
             placeholder="Cerca il libro che preferisci"
             aria-label="Recipient's username"

@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import fantasy from './fantasy.json'
 import SingleBook from './SingleBook';
-import SearchBooks from './SearchBooks';
+import { ThemeContext } from '../../context/ThemeContextProvider';
 
-export default function AllTheBooks() {
+export default function AllTheBooks( {searchTerm} ) {
+    
+  const {value} = useContext(ThemeContext);
+  
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+
+  async function fetchBooks() {
+    try {
+      // let response = await fetch("./fantasy.json");
+      // let data = await response.json(); 
+
+      setBooks(fantasy);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    async function fetchBooks() {
-      try {
-        // let response = await fetch("./fantasy.json");
-        // let data = await response.json(); 
-
-        setBooks(fantasy);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
     fetchBooks();
   }, []);
 
@@ -31,15 +33,12 @@ export default function AllTheBooks() {
   );
 
   return (
-    <div>
-        <h2 className='text-center'>Tutti i Libri</h2>
+    <div className={`bg-${value}`}>
+        <h2 className={`text-center text-${value === "dark" ? "light" : "dark"}`}>Tutti i Libri</h2>
         {error ? (
             <p>Errore durante il recupero dei dati: {error}</p>
         ) : (
-            <Container  className='my-3'>
-                <div className='d-flex justify-content-center mb-2'>
-                    <SearchBooks onSearch={(term) => setSearchTerm(term)} />
-                </div>
+            <Container  className='py-3'>
                 {loading ? ( 
                     <div className="d-flex justify-content-center">
                         <Spinner animation="border" role="status">

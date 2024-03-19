@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import { ThemeContext } from '../context/ThemeContextProvider';
 
 export default function Welcome() {
   const [showAlert, setShowAlert] = useState(false);
+
+  const {value} = useContext(ThemeContext);
 
   function handleButtonClick() {
     setShowAlert(!showAlert);
   };
 
   return (
-    <div className='my-3'>
+    <div className={`py-3 bg-${value}`}>
       <div className='d-flex justify-content-center mb-3'>
         <Button variant={showAlert ? 'success' : 'info'} onClick={handleButtonClick}>
             {showAlert ? 'SEI IL BENVENUTO' : 'WELCOME'}

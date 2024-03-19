@@ -1,17 +1,32 @@
-import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import SearchBooks from './SearchBooks';
+import {ThemeContext} from '../context/ThemeContextProvider';
 
-export default function MyNav() {
+export default function MyNav( {onSearch} ) {
+
+  const {value, setValue} = useContext(ThemeContext);
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" bg={value} data-bs-theme={value}>
       <Container>
         <Navbar.Brand href="#home">EPIBOOKS</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">About</Nav.Link>
-            <Nav.Link href="#link">Browse</Nav.Link>
+          <Nav className="align-items-center justify-content-between w-100">
+            <Nav.Item className='d-flex'>
+              <Nav.Link className='p-2' href="#home">Home</Nav.Link>
+              <Nav.Link className='p-2' href="#link">About</Nav.Link>
+              <Nav.Link className='p-2' href="#browse">Browse</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Button variant={value} onClick={() => setValue(value === "dark" ? "light" : "dark")}>
+                {value === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"}
+              </Button>
+            </Nav.Item>
+            <Nav.Item>
+              <SearchBooks onSearch={onSearch}/>
+            </Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>

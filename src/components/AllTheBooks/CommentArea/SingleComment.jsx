@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col, FormControl } from 'react-bootstrap';
+import { Button, Row, Col, FormControl } from 'react-bootstrap';
 import { FaEdit, FaTrash } from 'react-icons/fa'; // Importa icone da react-icons
 
 export default function SingleComment({ comment, onEdit, onDelete }) {
@@ -8,7 +8,6 @@ export default function SingleComment({ comment, onEdit, onDelete }) {
 
     const handleSave = () => {
         setIsEditing(false);
-        // Invia una richiesta per salvare il commento modificato
         onEdit(editedComment);
     };
 
