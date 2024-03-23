@@ -4,7 +4,7 @@ import fantasy from './fantasy.json'
 import SingleBook from './SingleBook';
 import { ThemeContext } from '../../context/ThemeContextProvider';
 
-export default function AllTheBooks( {searchTerm} ) {
+export default function AllTheBooks( {searchTerm, selectedBook, onSelected} ) {
     
   const {value} = useContext(ThemeContext);
   
@@ -48,8 +48,8 @@ export default function AllTheBooks( {searchTerm} ) {
                 ) : (
                     <Row className='gy-3'>
                         {filteredBooks.map(book => (
-                            <Col className='px-2' xs={3} key={book.asin}>
-                                <SingleBook book={book} />
+                            <Col className='px-2' xs={4} key={book.asin}>
+                                <SingleBook book={book} selectedBook={selectedBook} onSelected={onSelected}/>
                             </Col>
                         ))}
                     </Row>
