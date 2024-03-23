@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { ThemeContext } from '../../../context/ThemeContextProvider';
 
-export default function AddComment({ newComment, setNewComment, handleAddComment }) {
+export default function AddComment({ newComment, setNewComment, handleAddComment, book }) {
+
+    const {value} = useContext(ThemeContext);
+
+    useEffect(() => {
+        setNewComment(prevComment => ({
+            ...prevComment,
+            elementId: book.asin
+        }));
+    }, [book, setNewComment]);
+    
+
     function handleChange(e) {
         const { name, value } = e.target;
         setNewComment({ ...newComment, [name]: value });
     };
 
     return (
-        <div>
-            <h5 className='text-center'>Add Comment</h5>
+        <div className='pt-3'>
+            <h2 className={`text-center text-${value === "dark" ? "light" : "dark"}`}>Add Comments</h2>
             <Form>
                 <Form.Group controlId="commentText">
-                    <Form.Label>Comment</Form.Label>
+                    <Form.Label className={`text-${value === "dark" ? "light" : "dark"}`}>Comment</Form.Label>
                     <Form.Control
+                        className={`bg-${value === "dark" ? "dark-subtle" : "light-subtle"}`}
                         as="textarea"
                         rows={3}
                         name="comment"
@@ -22,15 +35,16 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
                     />
                 </Form.Group>
                 <Form.Group controlId="commentRating">
-                    <Form.Label>Rating</Form.Label>
+                    <Form.Label className={`pt-2 text-${value === "dark" ? "light" : "dark"}`}>Rating</Form.Label>
                     <Form.Control
+                        className={`bg-${value === "dark" ? "dark-subtle" : "light-subtle"}`}
                         name="rate"
                         value={newComment.rate}
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <div className='text-center mt-2'>
-                    <Button variant="primary" onClick={handleAddComment}>
+                <div className='text-center mt-4'>
+                    <Button variant="success" onClick={handleAddComment}>
                         Add Comment
                     </Button>
                 </div>

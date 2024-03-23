@@ -8,12 +8,14 @@ export default function SingleBook({ book, selectedBook, onSelected }) {
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
-    setIsSelected(selectedBook === book.asin);
-  }, [selectedBook, book.asin]);
+    setIsSelected(selectedBook.asin === book.asin);
+  }, [selectedBook.asin, book.asin]);
 
   function handleSelection() {
-    setIsSelected(!isSelected);
-    onSelected(book.asin);
+    onSelected(book);
+    if(selectedBook.asin !== book.asin){
+      setIsSelected(!isSelected);
+    }
   };
 
   return (

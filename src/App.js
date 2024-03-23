@@ -7,6 +7,7 @@ import MyNav from './components/MyNav';
 import MyFooter from './components/MyFooter';
 import Welcome from './components/Welcome';
 import AllTheBooks from './components/AllTheBooks/AllTheBooks';
+import CommentArea from './components/AllTheBooks/CommentArea/CommentArea';
 import { ThemeContext } from './context/ThemeContextProvider';
 
 function App() {
@@ -18,15 +19,11 @@ function App() {
     setSearchTerm(term);
   }
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState({});
 
-  function onSelected(selectedBookAsin) {
-    setSelected(selectedBookAsin);
+  function onSelected(selectedBook) {
+    setSelected(selectedBook);
   }
-
-  useEffect(() => {
-    console.log(selected);
-  }, [selected]);
 
   return (
     <>
@@ -38,7 +35,7 @@ function App() {
             <AllTheBooks searchTerm={searchTerm} selectedBook={selected} onSelected={onSelected}/>
           </Col>
           <Col xs={6}>
-            {/* Inserire la commentArea */}
+            <CommentArea book={selected}></CommentArea>
           </Col>
         </Row>
       </Container>

@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Spinner } from "react-bootstrap";
 import CommentList from './CommentList';
 import AddComment from './AddComment';
+import { ThemeContext } from "../../../context/ThemeContextProvider";
 
 export default function CommentArea({ book }) {
     const [comments, setComments] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [newComment, setNewComment] = useState({ comment: '', rate: '', elementId: book.asin });
+
+    const { value } = useContext(ThemeContext);
     
     async function fetchComments() {
+        if(!book.asin){
+            return;
+        }
+
         try {
             setLoading(true);
             const response = await fetch(`https://striveschool-api.herokuapp.com/api/books/${book.asin}/comments/`, {
@@ -31,7 +38,7 @@ export default function CommentArea({ book }) {
 
     useEffect(() => {
         fetchComments();
-    }, []);
+    }, [book.asin]);
 
     async function handleAddComment() {
         try {
@@ -92,10 +99,11 @@ export default function CommentArea({ book }) {
     };
 
     return (
-        <div className="p-2">
+        <div className="p-2 sticky-top">
+            <h2 className={`text-center text-${value === "dark" ? "light" : "dark"}`}>Comments</h2>
             {error && <p>Errore: {error}</p>}
             {loading ? ( // Mostra lo spinner se il caricamento è in corso
-                <Spinner animation="border" role="status">
+                <Spinner animation="border" role="status" variant={value === "dark" ? "light" : "dark"}>
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
                 ) : (
@@ -106,6 +114,7 @@ export default function CommentArea({ book }) {
             )}
             <AddComment
                 newComment={newComment}
+                book={book}
                 setNewComment={setNewComment}
                 handleAddComment={handleAddComment}
             />

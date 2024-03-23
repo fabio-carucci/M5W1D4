@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { Button, Row, Col, FormControl } from 'react-bootstrap';
+import React, { useContext, useState } from 'react';
+import { Button, Row, Col, FormControl, ListGroup } from 'react-bootstrap';
 import { FaEdit, FaTrash } from 'react-icons/fa'; // Importa icone da react-icons
+import { ThemeContext } from '../../../context/ThemeContextProvider';
 
 export default function SingleComment({ comment, onEdit, onDelete }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedComment, setEditedComment] = useState(comment);
+
+    const {value} = useContext(ThemeContext);
 
     const handleSave = () => {
         setIsEditing(false);
@@ -17,7 +20,7 @@ export default function SingleComment({ comment, onEdit, onDelete }) {
     };
 
     return (
-        <li className="my-3">
+        <ListGroup.Item variant={value !== "dark" ? "light" : "dark"}>
             {isEditing ? (
                 <Row>
                     <Col xs={12}>
@@ -41,18 +44,18 @@ export default function SingleComment({ comment, onEdit, onDelete }) {
                     </Col>
                 </Row>
             ) : (
-                <Row>
-                    <Col xs={12}>
+                <Row className={`text-center`}>
+                    <Col xs={8}>
                         <span>{comment.comment} - Rating: {comment.rate}</span>
                     </Col>
-                    <Col xs="auto">
+                    <Col xs={2}>
                         <Button variant="warning" onClick={() => setIsEditing(true)}><FaEdit /></Button>
                     </Col>
-                    <Col xs="auto">
+                    <Col xs={2}>
                         <Button variant="danger" onClick={() => onDelete(comment._id)}><FaTrash /></Button>
                     </Col>
                 </Row>
             )}
-        </li>
+        </ListGroup.Item>
     );
 }
