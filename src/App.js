@@ -6,6 +6,7 @@ import MyNav from './components/MyNav';
 import MyFooter from './components/MyFooter';
 import AllTheBooks from './components/AllTheBooks/AllTheBooks';
 import CommentArea from './components/CommentArea/CommentArea';
+import BookDetails from './components/BookDetails';
 import NotFound from './components/NotFound';
 import fantasy from './components/AllTheBooks/fantasy.json'
 import history from './components/AllTheBooks/history.json'
@@ -33,7 +34,7 @@ export default function App() {
     event.target.textContent = prevCategory.toUpperCase();
   };
 
-  const selectedBooks = categories[category] || [];
+  const selectedCategory = categories[category] || [];
 
   function onSearch(term) {
     setSearchTerm(term);
@@ -44,8 +45,9 @@ export default function App() {
       <BrowserRouter>
         {(window.location.pathname === "/") && <MyNav onSearch={onSearch}/>}
         <Routes>
-          <Route exact path="/" element={<AllTheBooks searchTerm={searchTerm} selectedBooks={selectedBooks} category={category} handleCategorySelect={handleCategorySelect}/>} />
-          <Route path="/:asin" element={<CommentArea selectedBooks={selectedBooks} />} />
+          <Route exact path="/" element={<AllTheBooks searchTerm={searchTerm} selectedCategory={selectedCategory} category={category} handleCategorySelect={handleCategorySelect}/>} />
+          {/* <Route path="/:asin" element={<CommentArea selectedCategory={selectedCategory} />} /> */}
+          <Route path="/:asin" element={<BookDetails selectedCategory={selectedCategory} />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         {(window.location.pathname === "/") && <MyFooter />}

@@ -5,11 +5,8 @@ import CommentList from './CommentList';
 import AddComment from './AddComment';
 import { ThemeContext } from "../../context/ThemeContextProvider";
 
-export default function CommentArea( {selectedBooks} ) {
+export default function CommentArea( {book} ) {
 
-    const { asin } = useParams();
-    const book = selectedBooks.find((book) => book.asin === asin);
-    
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -18,10 +15,6 @@ export default function CommentArea( {selectedBooks} ) {
     const { value } = useContext(ThemeContext);
     
     async function fetchComments() {
-        if(!book) {
-            setError('Nessun libro trovato con questo asin');
-            return;
-        }
 
         try {
             setLoading(true);
@@ -105,10 +98,10 @@ export default function CommentArea( {selectedBooks} ) {
     };
 
     return (
-        <div className={`bg-${value} py-3 d-flex flex-column align-items-center`}>
-            <h2 className={`text-center text-${value === "dark" ? "light" : "dark"}`}>Comments</h2>
+        <div className={`bg-${value} d-flex flex-column align-items-center sticky-top`}>
+            <h2 className={`pb-2 text-center text-${value === "dark" ? "light" : "dark"}`}>Comments</h2>
             {error && <p>Errore: {error}</p>}
-            <div className="w-50">
+            <div>
                 {loading ? ( // Mostra lo spinner se il caricamento è in corso
                     <Spinner animation="border" role="status" variant={value === "dark" ? "light" : "dark"}>
                         <span className="visually-hidden">Loading...</span>
