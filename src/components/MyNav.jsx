@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import SearchBooks from './SearchBooks';
 import {ThemeContext} from '../context/ThemeContextProvider';
+import { FiMoon, FiSun } from "react-icons/fi";
 
 export default function MyNav( {onSearch} ) {
 
@@ -10,7 +11,7 @@ export default function MyNav( {onSearch} ) {
   return (
     <Navbar expand="lg" bg={value} data-bs-theme={value}>
       <Container>
-        <Navbar.Brand href="#home">EPIBOOKS</Navbar.Brand>
+        <Navbar.Brand href="#home"><b>EPIBOOKS</b></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="align-items-center justify-content-between w-100">
@@ -21,7 +22,7 @@ export default function MyNav( {onSearch} ) {
             </Nav.Item>
             <Nav.Item>
               <Button variant={value} onClick={() => setValue(value === "dark" ? "light" : "dark")}>
-                {value === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"}
+                {value === "dark" ? <FiSun/> : <FiMoon/>}
               </Button>
             </Nav.Item>
             <Nav.Item>

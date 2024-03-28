@@ -1,5 +1,5 @@
 .custom-image {
-    height: 330px;
+    height: 280px;
     object-fit: cover;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .custom-title {
-    font-size: 12pt;
+    font-size: 11pt;
 
     display: -webkit-box;
     -webkit-line-clamp: 3;

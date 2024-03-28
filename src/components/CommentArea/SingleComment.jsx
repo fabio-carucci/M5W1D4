@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button, Row, Col, FormControl, ListGroup } from 'react-bootstrap';
 import { FaEdit, FaTrash } from 'react-icons/fa'; // Importa icone da react-icons
-import { ThemeContext } from '../../../context/ThemeContextProvider';
+import { ThemeContext } from '../../context/ThemeContextProvider';
 
 export default function SingleComment({ comment, onEdit, onDelete }) {
     const [isEditing, setIsEditing] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { ThemeContext } from '../../../context/ThemeContextProvider';
+import { ThemeContext } from '../../context/ThemeContextProvider';
 
 export default function AddComment({ newComment, setNewComment, handleAddComment, book }) {
 
