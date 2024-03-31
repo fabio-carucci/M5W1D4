@@ -18,7 +18,7 @@ export default function SingleBook({ book, selectedBook, handleSelectedBook }) {
       <Card.Body className="custom-body">
         <Card.Title className="custom-title">{book.title}</Card.Title>
       </Card.Body>
-      <Button variant="info" className="m-3" onClick={() => navigate(`/${book.asin}`)}>Dai un'occhiata!</Button>
+      <Button variant="info" className="m-3" onClick={() => navigate(`/detail/${book.asin}`)}>Dai un'occhiata!</Button>
     </Card>
   );
 }

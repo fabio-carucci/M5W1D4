@@ -5,7 +5,7 @@ import CommentList from './CommentList';
 import AddComment from './AddComment';
 import { ThemeContext } from "../../context/ThemeContextProvider";
 
-export default function CommentArea( {book} ) {
+export default function CommentArea( {book, isHomepage} ) {
 
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -98,13 +98,13 @@ export default function CommentArea( {book} ) {
     };
 
     return (
-        <div className={`bg-${value} d-flex flex-column align-items-center sticky-top`}>
-            <h2 className={`pb-2 text-center text-${value === "dark" ? "light" : "dark"}`}>Comments</h2>
+        <div className={`bg-${value} sticky-top`}>
+            <h2 className={`pb-2 text-center text-${value === "dark" ? "light" : "dark"}`}>Recensioni</h2>
             {error && <p>Errore: {error}</p>}
             <div>
                 {loading ? ( // Mostra lo spinner se il caricamento è in corso
                     <Spinner animation="border" role="status" variant={value === "dark" ? "light" : "dark"}>
-                        <span className="visually-hidden">Loading...</span>
+                        <span className="visually-hidden">Caricamento in corso...</span>
                     </Spinner>
                     ) : (
                     <CommentList 
@@ -117,6 +117,7 @@ export default function CommentArea( {book} ) {
                     book={book}
                     setNewComment={setNewComment}
                     handleAddComment={handleAddComment}
+                    isHomepage={isHomepage}
                 />
             </div>
         </div>

@@ -15,8 +15,6 @@ import romance from './components/AllTheBooks/romance.json'
 import scifi from './components/AllTheBooks/scifi.json'
 
 export default function App() {
-
-  const [searchTerm, setSearchTerm] = useState('');
   
   const categories = {
     fantasy: fantasy,
@@ -36,21 +34,18 @@ export default function App() {
 
   const selectedCategory = categories[category] || [];
 
-  function onSearch(term) {
-    setSearchTerm(term);
-  }
+
 
   return (
     <>
       <BrowserRouter>
-        {(window.location.pathname === "/") && <MyNav onSearch={onSearch}/>}
+        {/* {(window.location.pathname === "/") && <MyNav onSearch={onSearch}/>} */}
         <Routes>
-          <Route exact path="/" element={<AllTheBooks searchTerm={searchTerm} selectedCategory={selectedCategory} category={category} handleCategorySelect={handleCategorySelect}/>} />
+          <Route exact path="/" element={<AllTheBooks selectedCategory={selectedCategory} category={category} handleCategorySelect={handleCategorySelect}/>} />
           {/* <Route path="/:asin" element={<CommentArea selectedCategory={selectedCategory} />} /> */}
-          <Route path="/:asin" element={<BookDetails selectedCategory={selectedCategory} />} />
+          <Route path="/detail/:asin" element={<BookDetails selectedCategory={selectedCategory} />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
-        {(window.location.pathname === "/") && <MyFooter />}
       </BrowserRouter>
     </>
   );

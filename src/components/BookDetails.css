@@ -1,0 +1,19 @@
+.custom-detail-card {
+    width: 90%;
+    height: 650px;
+}
+
+img {
+    height: 550px;
+    object-fit: cover;
+}
+
+.detail-title {
+    font-size: 30pt;
+    font-weight: bold;
+    color: #c45b5b;
+    text-shadow: 1px 1px 1px white;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+  
