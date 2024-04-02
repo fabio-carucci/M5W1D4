@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from 'react-router-dom';
 import { Spinner } from "react-bootstrap";
 import CommentList from './CommentList';
 import AddComment from './AddComment';

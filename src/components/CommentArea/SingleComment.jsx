@@ -10,14 +10,24 @@ export default function SingleComment({ comment, onEdit, onDelete }) {
     const {value} = useContext(ThemeContext);
 
     const handleSave = () => {
-        setIsEditing(false);
-        onEdit(editedComment);
+        const confirmed = window.confirm("Sei sicuro di voler modificare?");
+        if (confirmed) {
+            setIsEditing(false);
+            onEdit(editedComment);
+        }
     };
 
     function handleChange(e) {
         const { name, value } = e.target;
         setEditedComment({ ...editedComment, [name]: value });
     };
+
+    function handleDelete() {
+        const confirmed = window.confirm("Sei sicuro di voler cancellare?");
+        if (confirmed) {
+            onDelete(comment._id);
+        }
+      }
 
     return (
         <ListGroup.Item variant={value !== "dark" ? "light" : "dark"}>
@@ -52,7 +62,7 @@ export default function SingleComment({ comment, onEdit, onDelete }) {
                         <Button variant="warning" onClick={() => setIsEditing(true)}><FaEdit /></Button>
                     </Col>
                     <Col xs={2}>
-                        <Button variant="danger" onClick={() => onDelete(comment._id)}><FaTrash /></Button>
+                        <Button variant="danger" onClick={handleDelete}><FaTrash /></Button>
                     </Col>
                 </Row>
             )}

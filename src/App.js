@@ -2,10 +2,7 @@ import './App.css';
 import React, { useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MyNav from './components/MyNav';
-import MyFooter from './components/MyFooter';
 import AllTheBooks from './components/AllTheBooks/AllTheBooks';
-import CommentArea from './components/CommentArea/CommentArea';
 import BookDetails from './components/BookDetails';
 import NotFound from './components/NotFound';
 import fantasy from './components/AllTheBooks/fantasy.json'
@@ -37,10 +34,8 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        {/* {(window.location.pathname === "/") && <MyNav onSearch={onSearch}/>} */}
         <Routes>
           <Route exact path="/" element={<AllTheBooks selectedCategory={selectedCategory} category={category} handleCategorySelect={handleCategorySelect}/>} />
-          {/* <Route path="/:asin" element={<CommentArea selectedCategory={selectedCategory} />} /> */}
           <Route path="/detail/:asin" element={<BookDetails selectedCategory={selectedCategory} />} />
           <Route path="/notFound" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />

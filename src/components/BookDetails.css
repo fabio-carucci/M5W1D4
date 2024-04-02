@@ -16,4 +16,12 @@ img {
     padding-bottom: 5px;
     margin-bottom: 20px;
 }
+
+#backToHomepageButton {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
   

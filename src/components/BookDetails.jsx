@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContextProvider";
-import { useParams, useNavigate } from 'react-router-dom';
-import { Spinner, Card, Container, Button, Row, Col } from "react-bootstrap";
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { Card, Container, Button, Row, Col } from "react-bootstrap";
 import MyNav from "./MyNav";
 import MyFooter from "./MyFooter";
 import "./BookDetails.css"
@@ -35,6 +35,7 @@ export default function BookDetails( { selectedCategory } ) {
 
     return (
         <>
+            <Button as={Link} to="/" variant={`outline-${value === 'dark' ? 'light' : 'dark'}`} id="backToHomepageButton">Torna alla homepage</Button>
             <MyNav />
             <Container className="mt-4">
                 <Row className="justify-content-center"> 
