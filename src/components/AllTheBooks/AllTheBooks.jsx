@@ -49,7 +49,9 @@ export default function AllTheBooks( { selectedCategory, category, handleCategor
                 </Container>
               </Col>
               <Col xs={4}>
-                <CommentArea book={selectedBook} isHomepage={true} />
+                <div className='sticky-top pt-4'>
+                  <CommentArea book={selectedBook} isHomepage={true} />
+                </div>
               </Col>
             </Row>
           </Container>

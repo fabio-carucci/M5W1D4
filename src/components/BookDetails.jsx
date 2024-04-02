@@ -9,7 +9,7 @@ import CommentArea from "./CommentArea/CommentArea";
 
 export default function BookDetails( { selectedCategory } ) {
 
-    const [book, setBook] = useState({});
+    const [book, setBook] = useState();
     const navigate = useNavigate();
     const { value } = useContext(ThemeContext);
     const { asin } = useParams();
