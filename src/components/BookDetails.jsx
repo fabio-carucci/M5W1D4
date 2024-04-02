@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContextProvider";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Spinner, Card, Container, Button, Row, Col } from "react-bootstrap";
 import MyNav from "./MyNav";
 import MyFooter from "./MyFooter";
@@ -9,15 +9,29 @@ import CommentArea from "./CommentArea/CommentArea";
 
 export default function BookDetails( { selectedCategory } ) {
 
-    const {value} = useContext(ThemeContext);
-
+    const [book, setBook] = useState({});
+    const navigate = useNavigate();
+    const { value } = useContext(ThemeContext);
     const { asin } = useParams();
-    const book = selectedCategory.find((book) => book.asin === asin);
+    
+    useEffect(() => {
+        const foundBook = selectedCategory.find((book) => book.asin === asin);
+        if (!foundBook) {
+            navigate('/notfound'); // Se il libro non viene trovato, naviga alla pagina NotFound
+        } else {
+            setBook(foundBook);
+        }
+    }, [selectedCategory, asin, navigate]);
 
-    useEffect(()=>{
+    useEffect(() => {
         document.querySelector("body").className = "";
         document.querySelector("body").classList.add(`bg-${value}`)
-    },[value])
+    }, [value]);
+
+    // Se il libro non è stato trovato, non renderizzare nulla
+    if (!book) {
+        return null;
+    }
 
     return (
         <>

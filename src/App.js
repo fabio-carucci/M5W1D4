@@ -34,8 +34,6 @@ export default function App() {
 
   const selectedCategory = categories[category] || [];
 
-
-
   return (
     <>
       <BrowserRouter>
@@ -44,7 +42,8 @@ export default function App() {
           <Route exact path="/" element={<AllTheBooks selectedCategory={selectedCategory} category={category} handleCategorySelect={handleCategorySelect}/>} />
           {/* <Route path="/:asin" element={<CommentArea selectedCategory={selectedCategory} />} /> */}
           <Route path="/detail/:asin" element={<BookDetails selectedCategory={selectedCategory} />} />
-          <Route path="/*" element={<NotFound />} />
+          <Route path="/notFound" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
