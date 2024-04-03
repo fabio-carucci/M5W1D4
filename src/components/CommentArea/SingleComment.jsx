@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Button, Row, Col, FormControl, ListGroup } from 'react-bootstrap';
-import { FaEdit, FaTrash } from 'react-icons/fa'; // Importa icone da react-icons
+import { FaEdit, FaTrash, FaRegUserCircle } from 'react-icons/fa';
 import { ThemeContext } from '../../context/ThemeContextProvider';
+import RatingStars from './RatingStars';
 
-export default function SingleComment({ comment, onEdit, onDelete }) {
+export default function SingleComment({ comment, onEdit, onDelete, isHomepage }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedComment, setEditedComment] = useState(comment);
 
@@ -54,15 +55,23 @@ export default function SingleComment({ comment, onEdit, onDelete }) {
                     </Col>
                 </Row>
             ) : (
-                <Row className={`text-center`}>
+                <Row className="align-items-center">
                     <Col xs={8}>
-                        <span>{comment.comment} - Rating: {comment.rate}</span>
+                        <div>
+                            <div style={ {fontSize: "10pt"} }>
+                                <FaRegUserCircle className='me-1' />
+                                <span className='text-success'>{comment.author}</span>
+                            </div>
+                            <span className='ms-3'>{comment.comment} - <RatingStars rating={comment.rate} /></span>
+                        </div>
                     </Col>
-                    <Col xs={2}>
-                        <Button variant="warning" onClick={() => setIsEditing(true)}><FaEdit /></Button>
-                    </Col>
-                    <Col xs={2}>
-                        <Button variant="danger" onClick={handleDelete}><FaTrash /></Button>
+                    <Col xs={4} className="text-end">
+                        <Button variant="warning" className="px-2 py-1 me-2" onClick={() => setIsEditing(true)}>
+                            <FaEdit />
+                        </Button>
+                        <Button variant="danger" className="px-2 py-1" onClick={handleDelete}>
+                            <FaTrash />
+                        </Button>
                     </Col>
                 </Row>
             )}

@@ -1,21 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { ThemeContext } from '../../context/ThemeContextProvider';
+import Rating from 'react-rating-stars-component';
+import { FaRegStar, FaStar } from 'react-icons/fa';
 
 export default function AddComment({ newComment, setNewComment, handleAddComment, book, isHomepage }) {
 
     const {value} = useContext(ThemeContext);
 
     const [showForm, setShowForm] = useState(false);
-
     
     useEffect(() => {
         isHomepage ? setShowForm(false) : setShowForm(true);
     }, [])
-
-    useEffect(() => {
-        console.log(showForm);
-    }, [showForm])
 
     useEffect(() => {
         setNewComment(prevComment => ({
@@ -47,7 +44,18 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
                 <h2 className={`py-2 text-center text-${value === "dark" ? "light" : "dark"}`}>Aggiungi una recensione</h2>
             )}
             {showForm && <Form>
-                <Form.Group controlId="commentText">
+                <Form.Group controlId="commentRating" className='d-flex justify-content-center mb-2'>
+                    <Rating
+                        count={5} // Numero di stelle
+                        size={30} // Dimensione delle stelle
+                        value={newComment.rate} // Valore selezionato
+                        onChange={(newRating) => setNewComment({ ...newComment, rate: newRating })} // Funzione chiamata al cambio di voto
+                        emptyIcon={<FaRegStar />} // Icona per stelle non selezionate
+                        filledIcon={<FaStar />} // Icona per stelle selezionate
+                        key={newComment.key} // Chiave per forzare l'aggiornamento del componente Rating
+                    /> 
+               </Form.Group>
+               <Form.Group controlId="commentText" className='d-flex flex-column align-items-center'>
                     <Form.Label className={`text-${value === "dark" ? "light" : "dark"}`}>Recensione</Form.Label>
                     <Form.Control
                         className={`bg-${value === "dark" ? "dark-subtle" : "light-subtle"}`}
@@ -56,18 +64,6 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
                         rows={3}
                         name="comment"
                         value={newComment.comment}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-                <Form.Group controlId="commentRating">
-                    <Form.Label className={`pt-2 text-${value === "dark" ? "light" : "dark"}`}>Voto</Form.Label>
-                    <Form.Control
-                        className={`bg-${value === "dark" ? "dark-subtle" : "light-subtle"}`}
-                        type="number"
-                        min={1}
-                        max={5}
-                        name="rate"
-                        value={newComment.rate}
                         onChange={handleChange}
                     />
                 </Form.Group>

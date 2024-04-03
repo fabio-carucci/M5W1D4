@@ -9,9 +9,17 @@ import CommentArea from "./CommentArea/CommentArea";
 
 export default function BookDetails( { selectedCategory } ) {
 
+    const { value } = useContext(ThemeContext);
+
+    useEffect(() => {
+        document.querySelector("body").className = "";
+        document.querySelector("body").classList.add(`bg-${value}`)
+    }, [value]);
+    
+
     const [book, setBook] = useState();
     const navigate = useNavigate();
-    const { value } = useContext(ThemeContext);
+
     const { asin } = useParams();
     
     useEffect(() => {
@@ -22,11 +30,6 @@ export default function BookDetails( { selectedCategory } ) {
             setBook(foundBook);
         }
     }, [selectedCategory, asin, navigate]);
-
-    useEffect(() => {
-        document.querySelector("body").className = "";
-        document.querySelector("body").classList.add(`bg-${value}`)
-    }, [value]);
 
     // Se il libro non è stato trovato, non renderizzare nulla
     if (!book) {

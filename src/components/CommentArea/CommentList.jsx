@@ -3,7 +3,7 @@ import SingleComment from './SingleComment';
 import { ListGroup } from 'react-bootstrap';
 import { ThemeContext } from '../../context/ThemeContextProvider';
 
-export default function CommentList({ comments, onEdit, onDelete }) {
+export default function CommentList({ comments, onEdit, onDelete, isHomepage }) {
 
     const { value } = useContext(ThemeContext);
 
@@ -12,7 +12,7 @@ export default function CommentList({ comments, onEdit, onDelete }) {
             {comments.length > 0 ? (
                 <ListGroup>
                     {comments.map((comment, index) => (
-                        <SingleComment key={index} comment={comment} onEdit={onEdit} onDelete={onDelete}/>
+                        <SingleComment key={index} comment={comment} onEdit={onEdit} onDelete={onDelete} isHomepage={isHomepage}/>
                     ))}
                 </ListGroup>
                 ) : (

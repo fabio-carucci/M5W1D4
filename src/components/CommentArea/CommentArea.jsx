@@ -9,7 +9,7 @@ export default function CommentArea( {book, isHomepage} ) {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [newComment, setNewComment] = useState({ comment: '', rate: '', elementId: book.asin });
+    const [newComment, setNewComment] = useState({ comment: '', rate: 0, elementId: book.asin });
 
     const { value } = useContext(ThemeContext);
     
@@ -36,6 +36,7 @@ export default function CommentArea( {book, isHomepage} ) {
 
     useEffect(() => {
         fetchComments();
+        setNewComment({ comment: '', rate: 0, key: Date.now(), elementId: book.asin });
     }, [book.asin]);
 
     async function handleAddComment() {
@@ -53,6 +54,7 @@ export default function CommentArea( {book, isHomepage} ) {
             }
             // Aggiorna la lista dei commenti dopo l'aggiunta di una nuova recensione
             fetchComments();
+            setNewComment({ comment: '', rate: 0, elementId: book.asin })
         } catch (error) {
             setError(error.message);
         }
@@ -107,6 +109,7 @@ export default function CommentArea( {book, isHomepage} ) {
                     </Spinner>
                     ) : (
                     <CommentList 
+                        isHomepage={isHomepage}
                         comments={comments} 
                         onEdit={onEdit} 
                         onDelete={onDelete}/>

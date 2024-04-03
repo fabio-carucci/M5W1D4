@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
+import { FaTimes } from 'react-icons/fa';
 
 export default function SearchBooks({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Funzione per eliminare il refresh automatico della pagina al submit e che attiva la ricerca sui libri
   function handleSubmit(e) {
-        e.preventDefault();
-        onSearch(searchTerm);
+    e.preventDefault();
+    onSearch(searchTerm);
   };
+
+  // Funzione per resettare il campo di ricerca
+  function handleClearSearch() {
+    setSearchTerm('');
+    onSearch('');
+  }
 
   return (
     <>
@@ -23,6 +31,12 @@ export default function SearchBooks({ onSearch }) {
           <Button type="submit" variant="outline-success" id="button-addon2">
             Cerca
           </Button>
+          {/* Mostra l'icona solo se il campo di ricerca non è vuoto */}
+          {searchTerm && (
+            <Button variant="outline-secondary" onClick={handleClearSearch}>
+              <FaTimes />
+            </Button>
+          )}
         </InputGroup>
       </Form>
     </>
