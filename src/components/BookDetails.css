@@ -3,7 +3,7 @@
     height: 540px;
 }
 
-img {
+.custom-image {
     height: 460px;
     object-fit: cover;
 }
