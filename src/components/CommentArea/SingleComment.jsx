@@ -10,13 +10,21 @@ export default function SingleComment({ comment, onEdit, onDelete, isHomepage })
 
     const {value} = useContext(ThemeContext);
 
-    const handleSave = () => {
+    function handleSave() {
         const confirmed = window.confirm("Sei sicuro di voler modificare?");
         if (confirmed) {
             setIsEditing(false);
             onEdit(editedComment);
         }
     };
+
+    function handleCancellation() {
+        const confirmed = window.confirm("Sei sicuro di voler annullare le tue modifiche?");
+        if (confirmed) {
+            setIsEditing(false);
+            setEditedComment(comment); // reimposta editedComment al valore originale
+        }
+    }   
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -34,7 +42,7 @@ export default function SingleComment({ comment, onEdit, onDelete, isHomepage })
         <ListGroup.Item variant={value !== "dark" ? "light" : "dark"}>
             {isEditing ? (
                 <Row>
-                    <Col xs={12}>
+                    <Col xs={9}>
                         <FormControl
                             type="text"
                             name="comment"
@@ -42,7 +50,7 @@ export default function SingleComment({ comment, onEdit, onDelete, isHomepage })
                             onChange={handleChange}
                         />
                     </Col>
-                    <Col xs={6}>
+                    <Col xs={3}>
                         <FormControl
                             type="number"
                             name="rate"
@@ -50,20 +58,14 @@ export default function SingleComment({ comment, onEdit, onDelete, isHomepage })
                             onChange={handleChange}
                         />
                     </Col>
-                    <Col xs={6}>
-                        <Button variant="success" onClick={handleSave}>Save</Button>
+                    <Col xs={12} className='text-center mt-2'>
+                        <Button variant="success" onClick={handleSave} className='me-2'>Salva</Button>
+                        <Button variant="danger" onClick={handleCancellation}>Annulla</Button>
                     </Col>
                 </Row>
             ) : (
                 <Row className="align-items-center">
                     <Col xs={9}>
-                        {/* <div>
-                            <div style={ {fontSize: isHomepage ? "10pt" : "12pt"} }>
-                                <FaRegUserCircle className='me-1' />
-                                <span className='text-success'>{comment.author}</span>
-                            </div>
-                            <span className='ms-3' style={ {fontSize: "12pt"} }>{comment.comment} - <RatingStars rating={comment.rate} /></span>
-                        </div> */}
                         <Row className='align-items-center'>
                             <Col xs={8} className='text-start'>
                                 <div style={ {fontSize: isHomepage ? "8pt" : "12pt"} }>
