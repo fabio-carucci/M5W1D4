@@ -41,6 +41,7 @@ export default function BookDetails( { selectedCategory } ) {
             <Button as={Link} to="/" variant={`outline-${value === 'dark' ? 'light' : 'dark'}`} id="backToHomepageButton">Torna alla homepage</Button>
             <MyNav />
             <Container className="mt-4">
+                <div className="detail-title">{book.title}</div>
                 <Row className="justify-content-center"> 
                     <Col md={4} className="d-flex justify-content-center"> 
                         <Card className={`custom-detail-card bg-${value === "dark" ? "dark-subtle" : "light-subtle"}`}>
@@ -54,7 +55,6 @@ export default function BookDetails( { selectedCategory } ) {
                         </Card>                    
                     </Col>
                     <Col md={8} className={`text-center text-${value === "dark" ? "light" : "dark"} px-2`}>
-                        <div className="detail-title">{book.title}</div>
                         <CommentArea book={book} isHomepage={false}/>
                     </Col>
                 </Row>

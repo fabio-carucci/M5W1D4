@@ -10,11 +10,13 @@ export default function CommentList({ comments, onEdit, onDelete, isHomepage }) 
     return (
         <div className='pt-2'>
             {comments.length > 0 ? (
-                <ListGroup>
-                    {comments.map((comment, index) => (
-                        <SingleComment key={index} comment={comment} onEdit={onEdit} onDelete={onDelete} isHomepage={isHomepage}/>
-                    ))}
-                </ListGroup>
+                <div style={{ maxHeight: "200px", overflowY: "auto" }}>
+                    <ListGroup>
+                        {comments.map((comment, index) => (
+                            <SingleComment key={index} comment={comment} onEdit={onEdit} onDelete={onDelete} isHomepage={isHomepage}/>
+                        ))}
+                    </ListGroup>
+                </div>
                 ) : (
                 <p className={`text-center fs-4 text-warning`}>Non ci sono ancora recensioni</p>
                 )

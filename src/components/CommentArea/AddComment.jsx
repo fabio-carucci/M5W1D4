@@ -38,10 +38,10 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
         <div className='pt-3'>
             {isHomepage ? (
                 <div className='d-flex justify-content-center'>
-                    <Button className='fs-5' variant={value} onClick={() => setShowForm(!showForm)}>{!showForm ? "Clicca per iniziare a scrivere una recensione!" : `Compila il form sottostante e premi "INVIO"`}</Button>
+                    <Button className='fs-5' variant={value} onClick={() => setShowForm(!showForm)}>{!showForm ? "Clicca per iniziare a scrivere una recensione!" : `Compila il form e premi "INVIO"`}</Button>
                 </div>
                 ) : (
-                <h2 className={`py-2 text-center text-${value === "dark" ? "light" : "dark"}`}>Aggiungi una recensione</h2>
+                <h2 className={`pt-2 m-0 text-center text-${value === "dark" ? "light" : "dark"}`}>Aggiungi una recensione</h2>
             )}
             {showForm && <Form>
                 <Form.Group controlId="commentRating" className='d-flex justify-content-center mb-2'>
@@ -61,7 +61,7 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
                         className={`bg-${value === "dark" ? "dark-subtle" : "light-subtle"}`}
                         placeholder='Incomincia a digitare...'
                         as="textarea"
-                        rows={3}
+                        rows={2}
                         name="comment"
                         value={newComment.comment}
                         onChange={handleChange}

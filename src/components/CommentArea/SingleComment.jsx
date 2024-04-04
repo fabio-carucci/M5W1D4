@@ -56,20 +56,41 @@ export default function SingleComment({ comment, onEdit, onDelete, isHomepage })
                 </Row>
             ) : (
                 <Row className="align-items-center">
-                    <Col xs={8}>
-                        <div>
-                            <div style={ {fontSize: "10pt"} }>
+                    <Col xs={9}>
+                        {/* <div>
+                            <div style={ {fontSize: isHomepage ? "10pt" : "12pt"} }>
                                 <FaRegUserCircle className='me-1' />
                                 <span className='text-success'>{comment.author}</span>
                             </div>
-                            <span className='ms-3'>{comment.comment} - <RatingStars rating={comment.rate} /></span>
-                        </div>
+                            <span className='ms-3' style={ {fontSize: "12pt"} }>{comment.comment} - <RatingStars rating={comment.rate} /></span>
+                        </div> */}
+                        <Row className='align-items-center'>
+                            <Col xs={8} className='text-start'>
+                                <div style={ {fontSize: isHomepage ? "8pt" : "12pt"} }>
+                                    <FaRegUserCircle className='me-1' />
+                                    <span className='text-success'>{comment.author}</span>
+                                </div>
+                                <div className='ms-3 fst-italic' style={ {fontSize: "12pt"} }> 
+                                    {comment.comment} 
+                                </div>
+                            </Col>
+                            <Col xs={4}>
+                                <div className='text-end'>
+                                    <RatingStars rating={comment.rate} />
+                                </div>
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col xs={4} className="text-end">
-                        <Button variant="warning" className="px-2 py-1 me-2" onClick={() => setIsEditing(true)}>
+                    <Col xs={3} className="text-end">
+                        <Button 
+                        onClick={() => setIsEditing(true)}
+                        style={ {color: "rgb(192, 89, 34)", backgroundColor: "transparent", border: "0px", fontSize: isHomepage ? "9pt" : "12pt"} }>
                             <FaEdit />
                         </Button>
-                        <Button variant="danger" className="px-2 py-1" onClick={handleDelete}>
+                        <Button 
+                        variant="danger" 
+                        onClick={handleDelete}
+                        style={ {color: "rgb(200, 51, 51)", backgroundColor: "transparent", border: "0px", fontSize: isHomepage ? "9pt" : "12pt"} }>
                             <FaTrash />
                         </Button>
                     </Col>

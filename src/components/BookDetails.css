@@ -1,15 +1,16 @@
 .custom-detail-card {
     width: 90%;
-    height: 650px;
+    height: 540px;
 }
 
 img {
-    height: 550px;
+    height: 460px;
     object-fit: cover;
 }
 
 .detail-title {
-    font-size: 30pt;
+    text-align: center;
+    font-size: 24pt;
     font-weight: bold;
     color: #c45b5b;
     text-shadow: 1px 1px 1px white;
@@ -24,4 +25,3 @@ img {
     transform: translateX(-50%);
     z-index: 1;
 }
-  

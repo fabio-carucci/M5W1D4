@@ -11,7 +11,16 @@ export default function MyNav( {onSearch, isHomepage} ) {
   return (
     <Navbar expand="lg" bg={value} data-bs-theme={value}>
       <Container>
-        <Navbar.Brand href="/"><b>EPIBOOKS</b></Navbar.Brand>
+      <Navbar.Brand href="#home">
+            <img
+              alt=""
+              src='src/img/epibooks-logo.png'
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
+            <b>Epibooks</b>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="align-items-center justify-content-between w-100">
