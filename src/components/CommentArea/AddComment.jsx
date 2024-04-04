@@ -28,11 +28,20 @@ export default function AddComment({ newComment, setNewComment, handleAddComment
     };
 
     function handleSubmit() {
+        // Controllo se sia il rating che il commento sono stati compilati
+        if (newComment.rate === 0 || newComment.comment.trim() === "") {
+            alert("Per favore, compila il rating e il commento prima di inviare la recensione.");
+            return;
+        }
+    
         handleAddComment();
-        if(isHomepage){
-            setShowForm(!showForm);
+    
+        // Riporto lo stato di showForm a false solo se isHomepage è true
+        if (isHomepage) {
+            setShowForm(false);
         }
     }
+    
 
     return (
         <div className='pt-3'>
