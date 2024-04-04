@@ -45,7 +45,7 @@ export default function BookDetails( { selectedCategory } ) {
                 <Row className="justify-content-center"> 
                     <Col md={4} className="d-flex justify-content-center"> 
                         <Card className={`custom-detail-card bg-${value === "dark" ? "dark-subtle" : "light-subtle"}`}>
-                            <Card.Img className="custom-image" src={book.img} />
+                            <Card.Img className="custom-detail-image" src={book.img} />
                             <Card.Body>
                                 <Card.Text>
                                     <strong>Category:</strong> {book.category}<br />
